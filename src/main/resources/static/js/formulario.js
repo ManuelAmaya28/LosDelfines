@@ -1,7 +1,7 @@
 
 let campDescripcion = document.getElementById("campDescrip");
 let campNombre = document.getElementById("campNombre");
-let Id = document.getElementById("campoId");
+/* let Id = document.getElementById("campoId"); */
 let Precio = document.getElementById("CampoPrecios");
 let Stock = document.getElementById("valiStock");
 let btnCrear = document.getElementById("botonCrear");
@@ -11,7 +11,7 @@ let src = "";
 let alertError = document.getElementById("alertError");
 let alertErrorTexto = document.getElementById("alertErrorTexto");
 let idTimeout;
-const URL_MAIN ='https://losdelfinesbackend-production.up.railway.app/productos/';
+const URL_MAIN ='http://127.0.0.1:8080/productos/';
 const reader = new FileReader();
 let correoUser;
 
@@ -21,7 +21,7 @@ btnCrear.addEventListener("click", function (event) {
     alertErrorTexto.innerHTML = "";
     alertError.style.display = "none";
     let Nombre = "Los siguientes campos deben ser llenados correctamente:<ul>";
-    let validacionCampoIDFuction = validacionCampoID();
+   /*  let validacionCampoIDFuction = validacionCampoID(); */
     let validacionCampoNombreFuction = validacionCampoNombre();
     let validacionCampoPrecioFuction = validacionPrecio();
     let validacionCampoDescripcionFuction = validacionDescripcion();
@@ -32,7 +32,7 @@ btnCrear.addEventListener("click", function (event) {
     idTimeout = setTimeout(function () {
         alertError.style.display = "none";
     }, 5000);
-    if (validacionCampoIDFuction == true && validacionCampoNombreFuction == true && validacionCampoPrecioFuction == true &&
+    if (/* validacionCampoIDFuction == true &&  */validacionCampoNombreFuction == true && validacionCampoPrecioFuction == true &&
         validacionCampoDescripcionFuction == true
         && validacionCampoStockFuction == true && validacionCampoImagenFuction == true) {
         const file = inputImagen.files[0];
@@ -104,7 +104,7 @@ btnCrear.addEventListener("click", function (event) {
         }
     }//ifCrear
 
-    function validacionCampoID() {
+ /*    function validacionCampoID() {
         let regex = /^[a-zA-Z0-9]$/;
         if (Id.value == "" || regex.test(Id.value)) {
             Id.style.border = "solid thin red";
@@ -114,7 +114,7 @@ btnCrear.addEventListener("click", function (event) {
             Id.style.border = "solid thin green";
             return true;
         }//if
-    }//validacionCampoID
+    }//validacionCampoID */
 
     function validacionCampoNombre() {
         if (campNombre.value <= 2 || campNombre.value > 50) {
@@ -198,8 +198,8 @@ campDescripcion.addEventListener("blur", function (event) {
 }); //blur*/
 
 const idUsuario = localStorage.getItem("idUsuario");
-const URL_MAIN2 = `https://losdelfinesbackend-production.up.railway.app/administradores/`;
-const URL_MAIN3 = `https://losdelfinesbackend-production.up.railway.app/api/usuarios/${idUsuario}`;
+const URL_MAIN2 = `http://127.0.0.1:8080/administradores/`;
+const URL_MAIN3 = `http://127.0.0.1:8080/usuarios/${idUsuario}`;
 let formularioID = document.getElementById("formularioID");
 
 window.addEventListener("load", function (event) {

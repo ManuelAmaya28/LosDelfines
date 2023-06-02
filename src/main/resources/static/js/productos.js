@@ -16,7 +16,7 @@ window.addEventListener("load", function (event) {
     addItems();
 });
 
-const URL_MAIN ='https://losdelfinesbackend-production.up.railway.app/productos/';
+const URL_MAIN ='http://127.0.0.1:8080/productos/';
 function addItems() {
 
    
@@ -47,7 +47,7 @@ function addItem(item) {
                 <p class="card-text text-justify">${item.descripcion}</p>
                 <p class="card-text text-justify">Stock: ${item.stock}</p>
                 <div style="display: flex; align-items: center; justify-content: space-around;">
-                <a href="#" class="btn btn-primary" id="botonAgregarCarrito">Agregar<br> al carrito</a>
+                <a href="https://wa.me/9999493508?text=Hola%20quiero%20pedir%20este%20producto%20${item.nombre}" target="_blank" class="btn btn-primary" id="botonAgregarCarrito">Comprar</a>
                 <h5 class="card-title" style = "padding-left: 15px; padding-top: 8px;">$${item.precio}</h5>
                 </div>
         </div>

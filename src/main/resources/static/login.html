@@ -67,7 +67,7 @@
         <div class="alert alert-danger fade show" style="display:none;" role="alert" id="alertErrorLogin">
             <p id="alertErrorTextoLogin"> </p>
         </div>
-        
+
         <form class="col">
             <div class="row-md-6">
                 <br>
@@ -84,6 +84,13 @@
             <div class="row-md-6" style="padding-top: 25px;">
                 <label class="form-label">Número de teléfono:</label>
                 <input type="input" class="form-control" placeholder="ejem.5556575859" id="campNumber">
+            </div>
+
+            <div class="row-md-6">
+                <br>
+                <label class="form-label">Dirección:</label>
+                <input type="text" class="form-control"
+                    placeholder="Calle / Número de casa / Cruzamientos / Fraccionamiento" id="direccion">
             </div>
 
             <div class="row-md-6" style="padding-top: 25px;">
@@ -105,13 +112,14 @@
                 <button type="add" class="btn btn-primary" id="botonCrear">Regístrate</button>
             </div>
             <br>
-            <div class="alert alert-success" style="display:none;" role="alert" id="alertExito"><!--Se agrega Alert de registro exitoso-->
+            <div class="alert alert-success" style="display:none;" role="alert" id="alertExito">
+                <!--Se agrega Alert de registro exitoso-->
                 <h4 class="alert-heading">¡Fantástico!</h4>
                 <p>¡Tu registro se ha realizado con éxito!</p>
                 <hr>
                 <p class="mb-0">Ahora inicia sesión y comienza a disfrutar de una maravillosa experiencia</p>
             </div>
-            
+
         </form>
     </div>
     <div class="ingresar">
@@ -125,20 +133,21 @@
                 <input type="password" class="form-control" placeholder="Contraseña" id="contraseñaLogin">
                 <p class="ingr" style="padding-top: 10px;">¿Olvidaste tu contraseña?</p>
                 <div class="col-12">
-                    <button type="add" class="btn btn-primary" id="botonIngresar">INGRESAR</button>
+                    <button type="add" class="btn btn-primary" id="botonIngresar">Ingresar</button>
                 </div>
-                <div class="alert alert-danger fade show" style="display: none; padding: 10px;" role="alert"
-                    id="errorLogin">
+                <div class="alert alert-danger fade show" style="display: none; padding: 10px; margin: 10px;"
+                    role="alert" id="errorLogin">
                     <p id="errorLoginTexto"> </p>
                 </div>
-                <div class="alert alert-success" style="display:none;" role="alert" id="alertInicioSesion"><!--Se agrega Alert de registro exitoso-->
+                <div class="alert alert-success" style="display:none;" role="alert" id="alertInicioSesion">
+                    <!--Se agrega Alert de registro exitoso-->
                     <h4 class="alert-heading">¡Haz iniciado sesión!</h4>
                     <h5 id="inicioSesionTexto"></h5>
                 </div>
             </div>
         </div>
         <div class="img">
-            <img src="./img/gota feliz.jpg" width="250" height="250" alt="" >
+            <img src="./img/gota feliz.jpg" width="250" height="250" alt="">
         </div>
     </div>
     <!-- FOOTER -->
