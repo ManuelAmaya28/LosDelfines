@@ -11,8 +11,6 @@ let botonCerrar = document.getElementById("botonCerrarSesion");
 
 botonCerrar.addEventListener("click", function (event) {
     event.preventDefault();
-
- 
     // Borrar el local storage
     localStorage.removeItem("idUsuario");
 
