@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=$PORT build/libs/LosDelfinesBackend-0.0.1-SNAPSHOT.jar
+web: java -jar -Dserver.port=$PORT build/libs/LosDelfines-0.0.1-SNAPSHOT.jar
