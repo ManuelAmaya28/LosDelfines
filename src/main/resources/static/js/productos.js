@@ -15,7 +15,7 @@ idUsuario = localStorage.getItem("idUsuario");
 let nombre;
 let correo;
 const URL_MAINUser = `http://127.0.0.1:8080/usuarios/${idUsuario}`;
-
+let spinner = document.getElementById("spinner");
 
 if (localStorage.getItem('idUsuario')) {
     window.addEventListener("load", function (event) {
@@ -23,10 +23,9 @@ if (localStorage.getItem('idUsuario')) {
     });
 } else {
     // La clave "idUsuario" no existe en el local storage
-    console.log('La clave "idUsuario" no existe en el local storage');
-window.addEventListener("load", function (event) {
-    addItems();
-});
+    window.addEventListener("load", function (event) {
+        addItems();
+    });
 }
 
 const URL_MAIN = 'http://127.0.0.1:8080/productos/';
@@ -34,17 +33,15 @@ function addItems() {
 
     fetch(URL_MAIN, { method: 'get' }).then(function (response) {
         response.json().then(function (json) {
-            console.log(json);
-            console.log(json.length);
             Array.from(json).forEach((item) => {
                 addItem(item);
             }); // foreach
         });//then
     }).catch(function (err) {
         console.log(err);
+    }).finally(function () {
+        spinner.style.display = "none";
     });
-    console.log(document.getElementById("div_Productos"));
-
 }// addItems
 
 
@@ -70,83 +67,38 @@ function addItem(item) {
 
 /* Obtener usuario */
 
-function addItemsUser() {
-    fetch(URL_MAINUser, { method: 'get' })
-        .then(response => response.json())
-        .then(data => {
-
-
-            fetch(URL_MAIN, { method: 'get' }).then(function (response) {
-                response.json().then(function (json) {
-                    console.log(json);
-                    console.log(json.length);
-                    Array.from(json).forEach((item) => {
-                        const itemHTML = `
-                        <div class = "cajitas container">
-                        <div class="card h-100">
-                            <img src="${item.imagen}" class="card-img-top" alt="imagen">
-                            <div class="card-body">
-                                <h5 class="card-title">${item.nombre}</h5>
-                                    <p class="card-text text-justify">${item.descripcion}</p>
-                                    <p class="card-text text-justify">Stock: ${item.stock}</p>
-            <div style="display: flex; align-items: center; justify-content: space-around;">
-                                    <a href="https://wa.me/9999493508?text=Hola,%20soy%20${data.nombre}%20quiero%20pedir%20este%20producto%20${item.nombre}%20al%20domicilio%20${data.domicilio}" target="_blank" class="btn btn-primary" id="botonAgregarCarrito">Comprar</a>
-                                    <h5 class="card-title" style = "padding-left: 15px; padding-top: 8px;">$${item.precio}</h5>
-            </div>
-        </div>
-    </div>
-</div>`;
-    const productosDiv = document.getElementById("productosDiv");
-    productosDiv.innerHTML += itemHTML;
-                    }); // foreach
-                });//then
-            }).catch(function (err) {
-                console.log('Error en la segunda llamada Fetch:', err);
-            });
-
-        }).catch(function (err) {
-            console.log('Error en la primera llamada Fetch:', err);
-        });
-}
-
-
-
-/* async function getUsuario() {
-
+async function addItemsUser() {
     try {
         const response = await fetch(URL_MAINUser, { method: 'get' });
-        const json = await response.json();
-        nombre = json.nombre;
-        correo = json.correo;
-        return true;
+        const userData = await response.json();
+
+        const responseMain = await fetch(URL_MAIN, { method: 'get' });
+        const jsonData = await responseMain.json();
+
+        let itemHTML = '';
+        jsonData.forEach((item) => {
+            itemHTML += `
+          <div class="cajitas container">
+            <div class="card h-100">
+              <img src="${item.imagen}" class="card-img-top" alt="imagen">
+              <div class="card-body">
+                <h5 class="card-title">${item.nombre}</h5>
+                <p class="card-text text-justify">${item.descripcion}</p>
+                <p class="card-text text-justify">Stock: ${item.stock}</p>
+                <div style="display: flex; align-items: center; justify-content: space-around;">
+                  <a href="https://wa.me/9999493508?text=Hola,%20soy%20${userData.nombre}%20quiero%20pedir%20este%20producto%20${item.nombre}%20al%20domicilio%20${userData.domicilio}" target="_blank" class="btn btn-primary" id="botonAgregarCarrito">Comprar</a>
+                  <h5 class="card-title" style="padding-left: 15px; padding-top: 8px;">$${item.precio}</h5>
+                </div>
+              </div>
+            </div>
+          </div>`;
+        });
+
+        const productosDiv = document.getElementById("productosDiv");
+        productosDiv.innerHTML = itemHTML;
     } catch (err) {
-        console.log(err);
-        return false;
-    }
-
-    }
-
-
-
-  getUsuario().then((resultado) => {
-        if (resultado) {
-            view();
-    } else {
-            console.log("error");
-    }
-    }).catch((error) => {
-        console.log(error);
-    });
-
-function view() {
-    mensaje.style.display = "none";
-    botonCerrar.style.display = "block";
-    const itemHTML = `
-        <div class = "micuenta">
-            <h1>Has iniciado sesion como ${nombre}</h1>
-            <h2>Correo electronico: ${correo}</h2>
-
-        </div>`;
-    const infocuenta = document.getElementById("infocuenta");
-    infocuenta.innerHTML += itemHTML;
-} */
+        console.log('Error en la llamada Fetch:', err);
+    } finally {
+        spinner.style.display = "none";
+    };
+}

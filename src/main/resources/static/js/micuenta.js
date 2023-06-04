@@ -25,7 +25,7 @@ if (localStorage.getItem('idUsuario')) {
             if (resultado) {
                 view();
             } else {
-                console.log("error");
+              
             }
         }).catch((error) => {
             console.log(error);
@@ -33,7 +33,7 @@ if (localStorage.getItem('idUsuario')) {
     });
 } else {
     // La clave "idUsuario" no existe en el local storage
-    console.log('La clave "idUsuario" no existe en el local storage');
+    
 }
 
 

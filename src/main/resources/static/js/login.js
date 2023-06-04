@@ -91,9 +91,6 @@ botonCrear.addEventListener("click", function (event) {
         const response = await fetch(URL_MAIN, { method: 'get' });
         const json = await response.json();
 
-        console.log(json);
-        console.log(json.length);
-
         Array.from(json).forEach((item) => {
           arrayValidarRegistro.push(item);
         });
@@ -106,7 +103,7 @@ botonCrear.addEventListener("click", function (event) {
     }
 
     obtenerDatos().then((arrayValidarRegistro) => {
-      console.log(arrayValidarRegistro);
+    
 
       if (validarUsuarioRegistrado(arrayValidarRegistro, usuario)) {
         fetch(URL_MAIN, {
@@ -116,7 +113,7 @@ botonCrear.addEventListener("click", function (event) {
           },
           body: JSON.stringify(usuario)
         }).then(response => response.json()).then(usuario => {
-          console.log('Success:', usuario);
+          
         }).catch((error) => {
           console.error('Error:', error);
         });
@@ -225,24 +222,6 @@ function validarContrasenaLogin() {
 }
 
 
-
-// function validarUsuarioLogin(correo, contra) {
-//     let arrayUsuarios = [];
-//     fetch(URL_MAIN, { method: 'get' }).then(function(response) { response.json().then(function (json) {
-//            console.log(json);
-//            console.log(json.length);
-//            arrayUsuarios = json;
-//            for (let i = 0; i < arrayUsuarios.length; i++) {
-//             console.log(arrayUsuarios[i]);
-//             if ((arrayUsuarios[i].correo === (correo)) && (arrayUsuarios[i].contrasena === contra)) {
-//                 return true;
-//             }
-//         }
-//         });//then
-//     }).catch(function(err) {
-//        console.log(err);
-//     });   
-// }
 botonIngresar.addEventListener("click", function (event) {
   event.preventDefault();
   errorLoginTexto.innerHTML = "";
@@ -253,12 +232,12 @@ botonIngresar.addEventListener("click", function (event) {
   validarUsuarioLogin(correoLogin.value, contraseñaLogin.value)
     .then((resultado) => {
       if (resultado) {
-        console.log("INICIO DE SESION EXITOSO");
+        
         window.location.replace("./loading.html");
       } else {
         mensajeError += "<li>Correo y/o contraseña incorrectos.</li>";
         errorLogin.style.display = "block";
-        console.log("correo ya registrado");
+        console.log("Correo ya registrado");
 
         correoLogin.style.border = "solid thin red";
         contraseñaLogin.style.border = "solid thin red";
@@ -277,11 +256,7 @@ async function validarUsuarioLogin(correo, contra) {
     const response = await fetch(URL_MAIN, { method: 'get' });
     const json = await response.json();
 
-    console.log(json);
-    console.log(json.length);
-
     for (let i = 0; i < json.length; i++) {
-      console.log(json[i]);
       if (json[i].correo === correo && json[i].contrasena === contra) {
         const idUsuario = json[i].id;
         localStorage.setItem("idUsuario", idUsuario);
